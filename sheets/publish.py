@@ -30,19 +30,32 @@ HARD_FILTERS_TAB = "Hard filters"
 README_TAB = "Read me"
 
 
+PREFERRED_SUBURBS_LIST_ROW = "preferred_suburbs_list"
+
+
 def _preferences_rows() -> pd.DataFrame:
     """One row per weight-able feature (see sheets/feature_labels.py for
     which ones and why), with each person's current weight (blank if they
     haven't set one) -- what you fill in/adjust in the Sheet, which
-    sheets/sync_back.py then reads back into their yaml."""
+    sheets/sync_back.py then reads back into their yaml. One row is special:
+    PREFERRED_SUBURBS_LIST_ROW holds actual suburb names (comma-separated),
+    not a numeric weight -- it's what the "preferred_suburbs" weight row
+    scores against."""
     names = people()
-    weights_by_person = {name: load_preferences(name)["weights"] for name in names}
+    prefs_by_person = {name: load_preferences(name) for name in names}
 
     rows = []
+    suburb_row = {"feature": PREFERRED_SUBURBS_LIST_ROW,
+                  "what_this_means": "Your preferred suburbs, comma-separated (not a number -- "
+                                      "see the 'preferred_suburbs' row below for how much this matters)"}
+    for name in names:
+        suburb_row[f"{name}_weight"] = ", ".join(prefs_by_person[name]["preferred_suburbs"])
+    rows.append(suburb_row)
+
     for feature, description in FEATURE_LABELS.items():
         row = {"feature": feature, "what_this_means": description}
         for name in names:
-            row[f"{name}_weight"] = weights_by_person[name].get(feature, "")
+            row[f"{name}_weight"] = prefs_by_person[name]["weights"].get(feature, "")
         rows.append(row)
     return pd.DataFrame(rows)
 

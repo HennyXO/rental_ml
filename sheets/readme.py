@@ -38,16 +38,20 @@ These are your dealbreakers -- anything failing even one of these gets automatic
 
 - max_weekly_rent_aud: write a number, e.g. 1100
 - min_bedrooms: write a number, e.g. 3
-- allowed_suburbs: write suburb names separated by commas, e.g. Glebe, Leichhardt, Redfern -- leave blank to allow any suburb
+- allowed_suburbs: write suburb names separated by commas, e.g. Glebe, Leichhardt, Redfern -- leave blank to allow any suburb. Usually you DON'T want this one filled in (see note below).
 - pet_friendly_required: write TRUE if you only want pet-friendly places, otherwise leave blank
 
-Change these any time -- if your budget or suburb list shifts, just update the cell.
+Change these any time -- if your budget shifts, just update the cell.
+
+A note on suburbs specifically: allowed_suburbs here is a hard cutoff -- a listing one suburb outside your list gets thrown away automatically, even if it would've been great. Most of the time you actually want the softer version instead: leave allowed_suburbs blank, and use "preferred_suburbs_list" + "preferred_suburbs" in the Preferences tab below, which boosts the score for suburbs you like without ruling anything else out entirely.
 
 ===== THE "PREFERENCES" TAB =====
 
 This is the useful one: it's where you tell the system what YOU actually care about, so it can score new listings roughly the way you would, before either of us has even looked at them properly.
 
-Each row is one feature of a listing -- see the "what_this_means" column for a plain-English explanation of each one. In your column (pagni_weight), put a number:
+One row is different from the rest: "preferred_suburbs_list" takes actual suburb names (comma-separated, e.g. Glebe, Leichhardt, Newtown), not a number -- it's the list that the "preferred_suburbs" row just below it scores against. Fill in the list, then set how much it matters using the same -1 to 1 scale as everything else.
+
+Every other row is one feature of a listing -- see the "what_this_means" column for a plain-English explanation of each one. In your column (pagni_weight), put a number:
 
    1.0   an absolute must, I really want this
    0.5   I'd like this, matters a fair bit

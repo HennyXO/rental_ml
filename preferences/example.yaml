@@ -5,18 +5,31 @@
 # or a weight.
 #
 # Eventually these files get regenerated from the shared Google Sheet's
-# "Preferences" tab (see sheets/sync_back.py) once both of you have ranked
-# things there -- treat this as a reasonable starting point, not something
-# to agonize over by hand.
+# "Preferences" / "Hard filters" tabs (see sheets/sync_back.py) once
+# you've filled things in there -- treat this as a reasonable starting
+# point, not something to agonize over by hand.
 
 hard_filters:
-  # A listing failing ANY of these gets auto-flagged to skip -- this is
-  # the "screen out quickly" mechanism. Key naming is read literally by
-  # score/fit_score.py: max_<column>, min_<column>, <column>_required.
+  # A listing failing ANY of these gets auto-flagged to skip, before
+  # either of you spends time reading it -- this is the "screen out
+  # quickly" mechanism. Key naming is read literally by score/fit_score.py:
+  # max_<column>, min_<column>, allowed_<column> (must be one of a list),
+  # <column>_required.
   max_weekly_rent_aud: 1200
   min_bedrooms: 3
   max_commute_transit_minutes: 45
   pet_friendly_required: false
+  # allowed_suburbs is a HARD cutoff -- a listing outside this list gets
+  # auto-skipped, no exceptions. Often too strict (a great listing one
+  # suburb over still gets thrown away); leave it blank/omitted like this
+  # unless you genuinely never want to hear about anywhere else, and use
+  # preferred_suburbs below for a softer version instead.
+  # allowed_suburbs: ["Glebe", "Leichhardt"]
+
+# A SOFT suburb preference -- doesn't exclude anything, just boosts the
+# score for listings in these suburbs. Weight how much via
+# weights.preferred_suburbs below.
+preferred_suburbs: ["Glebe", "Leichhardt", "Newtown"]
 
 weights:
   # Roughly -1..1. Positive = more of this is better; negative = less is
@@ -24,6 +37,7 @@ weights:
   # don't care. Only listed here for illustration -- add/remove whatever
   # actually matters to you.
   weekly_rent_aud: -0.6
+  preferred_suburbs: 0.5
   commute_transit_minutes: -0.5
   nearest_train_station_walk_minutes: -0.4
   air_conditioning: 0.5

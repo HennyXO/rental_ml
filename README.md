@@ -163,12 +163,23 @@ one of you may not have this repo at all. The "Preferences" tab is the
 weighted-ranking exercise: one row per feature (with a plain-English
 `what_this_means` column), a `<name>_weight` column each of you fills in
 directly. The "Hard filters" tab is the actual dealbreakers -- budget,
-minimum bedrooms, allowed suburbs, pet-friendly required, max commute --
-one row per filter, a `<name>_value` column each of you fills in; a blank
-cell means that filter doesn't apply to you. `sync_back` regenerates
-`preferences/<name>.yaml` (both `hard_filters` and `weights`) from
-whatever's currently in the Sheet -- hand-editing the yaml directly still
-works, but the next `sync_back` overwrites it.
+minimum bedrooms, pet-friendly required, max commute -- one row per
+filter, a `<name>_value` column each of you fills in; a blank cell means
+that filter doesn't apply to you. `sync_back` regenerates
+`preferences/<name>.yaml` (`hard_filters`, `preferred_suburbs`, and
+`weights`) from whatever's currently in the Sheet -- hand-editing the
+yaml directly still works, but the next `sync_back` overwrites it.
+
+Suburbs get two options, deliberately not just one: `allowed_suburbs` in
+"Hard filters" is a hard cutoff (a listing outside the list is auto-
+skipped, no exceptions -- often too strict). `preferred_suburbs_list` +
+the `preferred_suburbs` weight in "Preferences" is the softer version --
+boosts the score for suburbs you like without ruling out anything else,
+computed as a straight `suburb in preferred_suburbs` boolean rather than
+a normal numeric column (see the special-case in
+`score/fit_score.py:score_person`). Most people want the soft version;
+`allowed_suburbs` stays available for anyone who really does want a hard
+cutoff.
 
 ## Feature catalogue
 

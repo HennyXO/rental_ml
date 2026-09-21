@@ -12,6 +12,8 @@ from __future__ import annotations
 
 FEATURE_LABELS: dict[str, str] = {
     "weekly_rent_aud": "Weekly rent ($)",
+    "preferred_suburbs": "How much it matters that the suburb is one of your preferred suburbs "
+                          "(see the 'preferred_suburbs_list' row for which ones)",
     "bedrooms": "Number of bedrooms",
     "bathrooms": "Number of bathrooms",
     "parking_spaces": "Number of car spaces",

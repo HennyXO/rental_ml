@@ -34,6 +34,7 @@ def load_preferences(name: str) -> dict:
         data = yaml.safe_load(f) or {}
     data.setdefault("hard_filters", {})
     data.setdefault("weights", {})
+    data.setdefault("preferred_suburbs", [])
     return data
 
 
@@ -94,9 +95,18 @@ def score_person(df: pd.DataFrame, name: str) -> pd.DataFrame:
 
     raw = pd.Series(0.0, index=df.index)
     for column, weight in prefs["weights"].items():
-        if not weight or column not in df.columns:
+        if not weight:
             continue
-        raw = raw + weight * _normalize(df[column])
+        if column == "preferred_suburbs":
+            # special case: not a df column to normalize, but membership
+            # in the person's own preferred_suburbs list -- already 0/1,
+            # like a boolean amenity, so no normalization needed.
+            values = df["suburb"].isin(prefs["preferred_suburbs"]).astype(float)
+        elif column in df.columns:
+            values = _normalize(df[column])
+        else:
+            continue
+        raw = raw + weight * values
     df[f"{name}_fit_score"] = (_normalize(raw) * 10).round(1)
 
     return df

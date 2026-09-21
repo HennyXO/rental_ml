@@ -21,6 +21,7 @@ from ingest.schema import get_connection
 from score.fit_score import people
 from sheets.client import open_sheet, read_dataframe
 from sheets.hard_filter_labels import HARD_FILTER_SPECS, parse_value
+from sheets.publish import PREFERRED_SUBURBS_LIST_ROW
 
 LISTINGS_TAB = "Listings"
 PREFERENCES_TAB = "Preferences"
@@ -94,12 +95,18 @@ def sync_preferences() -> None:
 
     for name in people():
         weights = {}
+        preferred_suburbs = []
         weight_col = f"{name}_weight"
         if not prefs_df.empty and "feature" in prefs_df.columns and weight_col in prefs_df.columns:
             for _, row in prefs_df.iterrows():
+                feature = row["feature"]
+                if feature == PREFERRED_SUBURBS_LIST_ROW:
+                    raw = str(row.get(weight_col, "")).strip()
+                    preferred_suburbs = [s.strip() for s in raw.split(",") if s.strip()]
+                    continue
                 value = _as_float(row.get(weight_col))
                 if value is not None:
-                    weights[row["feature"]] = value
+                    weights[feature] = value
 
         hard_filters = {}
         value_col = f"{name}_value"
@@ -115,9 +122,13 @@ def sync_preferences() -> None:
 
         path = config.PREFERENCES_DIR / f"{name}.yaml"
         with path.open("w", encoding="utf-8") as f:
-            yaml.safe_dump({"hard_filters": hard_filters, "weights": weights}, f, sort_keys=False)
+            yaml.safe_dump(
+                {"hard_filters": hard_filters, "preferred_suburbs": preferred_suburbs, "weights": weights},
+                f, sort_keys=False,
+            )
         print(f"Regenerated preferences/{name}.yaml from the Sheet "
-              f"({len(hard_filters)} hard filter(s), {len(weights)} weight(s)).")
+              f"({len(hard_filters)} hard filter(s), {len(preferred_suburbs)} preferred suburb(s), "
+              f"{len(weights)} weight(s)).")
 
 
 def main() -> None:
