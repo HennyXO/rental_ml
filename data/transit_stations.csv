@@ -1,0 +1,377 @@
+name,lat,lon,mode
+Aberdeen Station,-32.16687179,150.89194732,train
+Adamstown Station,-32.93365273,151.72020335,train
+Albion Park Station,-34.56288179,150.79871523,train
+Allawah Station,-33.96972995,151.11454867,train
+Arlington Light Rail,-33.90191238,151.1381126,light_rail
+Arncliffe Station,-33.93678246,151.147174,train
+Artarmon Station,-33.80854241,151.18470089,train
+Ashfield Station,-33.88763777,151.12585123,train
+Asquith Station,-33.68852348,151.10820109,train
+Auburn Station,-33.8494301,151.03301684,train
+Austinmer Station,-34.30645714,150.92923261,train
+Awaba Station,-33.01297684,151.54212359,train
+Bank Street Light Rail,-33.87089194,151.19235857,light_rail
+Banksia Station,-33.94499641,151.14058914,train
+Bankstown Station,-33.91784784,151.03465392,train
+Barangaroo Station,-33.85957698,151.20261517,metro
+Bardwell Park Station,-33.93141993,151.12526266,train
+Bargo Station,-34.29108396,150.58011741,train
+Bathurst Station,-33.42559763,149.5831806,train
+Beecroft Station,-33.74927233,151.06660668,train
+Bell Station,-33.50601251,150.27910205,train
+Bella Vista Station,-33.73056616,150.94401959,metro
+Bellambi Station,-34.36264805,150.91011528,train
+Benaud Oval Light Rail,-33.80080926,151.00455729,light_rail
+Berala Station,-33.87178351,151.03252488,train
+Beresfield Station,-32.79929092,151.6582626,train
+Berowra Station,-33.62338518,151.15323454,train
+Berry Station,-34.78030845,150.696616,train
+Beverly Hills Station,-33.94912063,151.08086032,train
+Bexley North Station,-33.93750842,151.11377376,train
+Birrong Station,-33.89258874,151.02427803,train
+Blackheath Station,-33.63374163,150.28438143,train
+Blacktown Station,-33.76854404,150.90708043,train
+Blaxland Station,-33.74374219,150.60978672,train
+Bomaderry Station,-34.85383874,150.6097542,train
+Bombo Station,-34.65853912,150.85385441,train
+Bondi Junction Station,-33.89119702,151.24837675,train
+Booragul Station,-32.97170853,151.60494259,train
+Bowral Station,-34.47817984,150.41663309,train
+Branxton Station,-32.66222662,151.34553741,train
+Bridge Street Light Rail,-33.86415051,151.20746219,light_rail
+Broadmeadow Station,-32.92272405,151.73499102,train
+Bullaburra Station,-33.72338686,150.41500219,train
+Bulli Station,-34.33443113,150.91475593,train
+Bundanoon Station,-34.65596932,150.29949924,train
+Burradoo Station,-34.49420232,150.39796611,train
+Burwood Station,-33.87710168,151.10385716,train
+Cabramatta Station,-33.89474039,150.93887636,train
+Campbelltown Station,-34.06355569,150.81463149,train
+Canley Vale Station,-33.88732821,150.94353766,train
+Capitol Square Light Rail,-33.87977512,151.20557292,light_rail
+Cardiff Station,-32.94142086,151.66266152,train
+Caringbah Station,-34.04157831,151.12202571,train
+Carlingford Light Rail,-33.78197129,151.0471877,light_rail
+Carlton Station,-33.96824293,151.12450153,train
+Carramar Station,-33.88445193,150.96098356,train
+Castle Hill Station,-33.73162575,151.00728849,metro
+Casula Station,-33.95021052,150.91182891,train
+Central Station,-33.88402424,151.20620308,light_rail
+Central Station,-33.88402424,151.20620308,metro
+Central Station,-33.88402424,151.20620308,train
+Chatswood Station,-33.79723668,151.18093364,metro
+Chatswood Station,-33.79723668,151.18093364,train
+Cheltenham Station,-33.75561151,151.07845967,train
+Cherrybrook Station,-33.73665917,151.03199446,metro
+Chester Hill Station,-33.8836589,151.0002517,train
+Childrens Hospital Light Rail,-33.80258932,150.99302641,light_rail
+Chinatown Light Rail,-33.87854999,151.20556672,light_rail
+Church Street Light Rail,-33.81295045,151.00361257,light_rail
+Circular Quay,-33.86135094,151.21081302,light_rail
+Circular Quay,-33.86135094,151.21081302,train
+Civic Light Rail,-32.92701374,151.77180208,light_rail
+Clarendon Station,-33.60858478,150.78789489,train
+Clyde Station,-33.83595319,151.01694198,train
+Coalcliff Station,-34.24228517,150.97715193,train
+Cockle Creek Station,-32.94267124,151.62376463,train
+Coledale Station,-34.28967263,150.94316009,train
+Como Station,-34.00461939,151.06824108,train
+Concord West Station,-33.84860505,151.08562376,train
+Coniston Station,-34.43783563,150.88520162,train
+Convention Light Rail,-33.87267923,151.19807368,light_rail
+Corrimal Station,-34.3755701,150.90502206,train
+Cowan Station,-33.59356714,151.17177424,train
+Cringila Station,-34.4672708,150.87849446,train
+Cronulla Station,-34.05578475,151.15149843,train
+Crown Street Light Rail,-32.92639537,151.77736549,light_rail
+Crows Nest Station,-33.8256203,151.19913651,metro
+Croydon Station,-33.88307479,151.11520613,train
+Dapto Station,-34.49301276,150.79168664,train
+Denistone Station,-33.79962625,151.08692825,train
+Domestic Airport Station,-33.93362984,151.18065972,train
+Doonside Station,-33.76389763,150.86869678,train
+Dora Creek Station,-33.08371456,151.50094658,train
+Douglas Park Station,-34.18324664,150.7103495,train
+Dulwich Grove Light Rail,-33.90501667,151.13904088,light_rail
+Dulwich Hill Station,-33.91094279,151.14072187,light_rail
+Dundas Light Rail,-33.80381148,151.03322502,light_rail
+Dungog Station,-32.40246106,151.7593395,train
+ES Marks Light Rail,-33.90603248,151.22389387,light_rail
+East Hills Station,-33.9618174,150.98472867,train
+East Maitland Station,-32.74471896,151.58733085,train
+East Richmond Station,-33.60172876,150.75891556,train
+Eastwood Station,-33.79030086,151.08229721,train
+Edgecliff Station,-33.87937104,151.23625289,train
+Edmondson Park Station,-33.96932346,150.85880158,train
+Emu Plains Station,-33.74572534,150.67142718,train
+Engadine Station,-34.06770196,151.01486023,train
+Epping Station,-33.77283671,151.08208231,metro
+Epping Station,-33.77283671,151.08208231,train
+Erskineville Station,-33.90018265,151.1854959,train
+Exeter Station,-34.6136271,150.31745419,train
+Exhibition Centre Light Rail,-33.87714146,151.1995888,light_rail
+Fairfield Station,-33.87224505,150.95725354,train
+Fairy Meadow Station,-34.39521697,150.89644618,train
+Fassifern Station,-32.98563743,151.58094353,train
+Faulconbridge Station,-33.6965933,150.53493365,train
+Fennell Street Light Rail,-33.80517415,151.00582954,light_rail
+Flemington Station,-33.86491214,151.07017841,train
+Gadigal Station,-33.87308122,151.20872206,metro
+Gerringong Station,-34.74476128,150.81760128,train
+Glebe Light Rail,-33.87720829,151.18732093,light_rail
+Glenbrook Station,-33.76911515,150.62104944,train
+Glenfield Station,-33.97220759,150.89306653,train
+Gordon Station,-33.75591148,151.15444755,train
+Gosford Station,-33.42348495,151.3417336,train
+Goulburn Station,-34.75829984,149.71935426,train
+Granville Station,-33.83275764,151.01186867,train
+Green Square Station,-33.90607818,151.20257663,train
+Greta Station,-32.68687245,151.38420433,train
+Guildford Station,-33.85443792,150.98439283,train
+Gymea Station,-34.0348695,151.08526089,train
+Hamilton Station,-32.91846324,151.748498,train
+Harris Park Station,-33.82335268,151.00765002,train
+Hawkesbury River Station,-33.54684344,151.22657548,train
+Hawthorne Light Rail,-33.87953059,151.14722768,light_rail
+Haymarket Light Rail,-33.88139919,151.20524224,light_rail
+Hazelbrook Station,-33.72368467,150.45415753,train
+Heathcote Station,-34.08791879,151.00833242,train
+Helensburgh Station,-34.17705075,150.99425973,train
+Hexham Station,-32.82904693,151.68423079,train
+High Street Station,-32.74146174,151.56407488,train
+Hilldale Station,-32.50431666,151.64987977,train
+Hills Showground Station,-33.72791245,150.98702465,metro
+Holsworthy Station,-33.96319517,150.95658976,train
+Homebush Station,-33.86668795,151.08619478,train
+Honeysuckle Light Rail,-32.92646158,151.76574844,light_rail
+Hornsby Station,-33.70347479,151.09835973,train
+Hurstville Station,-33.96744133,151.10269428,train
+Ingleburn Station,-33.99748219,150.86457694,train
+International Airport Station,-33.93497091,151.16584068,train
+Jannali Station,-34.01610952,151.06464581,train
+John Street Square Light Rail,-33.86730371,151.19216125,light_rail
+Jubilee Park Light Rail,-33.8754205,151.17868917,light_rail
+Juniors Kingsford Light Rail,-33.92516263,151.22932487,light_rail
+Katoomba Station,-33.71203514,150.31166184,train
+Kellyville Station,-33.71337441,150.93523145,metro
+Kembla Grange Station,-34.47018181,150.81760282,train
+Kensington Light Rail,-33.90922115,151.22339227,light_rail
+Kiama Station,-34.67266689,150.8544551,train
+Killara Station,-33.76569908,151.16184659,train
+Kings Cross Station,-33.87448343,151.2222282,train
+Kingsford Light Rail,-33.92205655,151.22690151,light_rail
+Kingsgrove Station,-33.94048235,151.10081465,train
+Kingswood Station,-33.75842011,150.72053259,train
+Kirrawee Station,-34.03497564,151.07121805,train
+Kogarah Station,-33.96254149,151.13248719,train
+Koolewong Station,-33.46639025,151.31850646,train
+Kotara Station,-32.94158666,151.69783908,train
+Lapstone Station,-33.77345788,150.64280498,train
+Lawson Station,-33.7191006,150.42980295,train
+Leichhardt North Light Rail,-33.87497192,151.15415771,light_rail
+Leightonfield Station,-33.88148108,150.98489517,train
+Leppington Station,-33.95445703,150.80817012,train
+Leumeah Station,-34.05067661,150.83060671,train
+Leura Station,-33.71207455,150.33095833,train
+Lewisham Station,-33.89341703,151.14770641,train
+Lewisham West Light Rail,-33.89383232,151.14340478,light_rail
+Lidcombe Station,-33.86375583,151.04512981,train
+Lilyfield Light Rail,-33.87417369,151.16497483,light_rail
+Linden Station,-33.71489917,150.50520665,train
+Lindfield Station,-33.77552136,151.16927068,train
+Lisarow Station,-33.38209529,151.37017048,train
+Lithgow Station,-33.48066213,150.156808,train
+Liverpool Station,-33.92492704,150.92732848,train
+Lochinvar Station,-32.72051037,151.45018468,train
+Loftus Station,-34.04522117,151.05131573,train
+Lysaghts Station,-34.45464259,150.87607125,train
+Macarthur Station,-34.07199134,150.79716422,train
+Macdonaldtown Station,-33.89695934,151.18569469,train
+Macquarie Fields Station,-33.98485908,150.87882445,train
+Macquarie Park Station,-33.78507995,151.12837418,metro
+Macquarie University Station,-33.77728198,151.11826703,metro
+Maitland Station,-32.73800633,151.55209853,train
+Marayong Station,-33.74609965,150.90017109,train
+Marion Light Rail,-33.88389956,151.14511676,light_rail
+Martin Place Station,-33.86764769,151.21058267,metro
+Martin Place Station,-33.86764769,151.21058267,train
+Martins Creek Station,-32.55864517,151.61846534,train
+Marulan Station,-34.70952313,150.00611951,train
+Mascot Station,-33.92317637,151.1873354,train
+Meadowbank Station,-33.81579356,151.09010555,train
+Medlow Bath Station,-33.6735552,150.28064561,train
+Menangle Park Station,-34.10356765,150.74497444,train
+Menangle Station,-34.12534919,150.74436474,train
+Merrylands Station,-33.83668568,150.99248668,train
+Metford Station,-32.765202,151.61823769,train
+Milsons Point Station,-33.8459361,151.21183697,train
+Mindaribba Station,-32.66833861,151.58450215,train
+Minnamurra Station,-34.62633152,150.85282021,train
+Minto Station,-34.02744354,150.84249432,train
+Miranda Station,-34.03625439,151.10209197,train
+Mittagong Station,-34.45254929,150.44834624,train
+Moore Park Light Rail,-33.89363632,151.22175819,light_rail
+Morisset Station,-33.10896063,151.48814873,train
+Mortdale Station,-33.9710471,151.08100076,train
+Moss Vale Station,-34.54797724,150.37174595,train
+Mount Colah Station,-33.67174586,151.11469754,train
+Mount Druitt Station,-33.76955803,150.82012586,train
+Mount Kuring-gai Station,-33.65358907,151.13682391,train
+Mount Victoria Station,-33.58820075,150.25692324,train
+Mulgrave Station,-33.6265162,150.83003584,train
+Museum Station,-33.8755711,151.20994628,train
+Muswellbrook Station,-32.26742607,150.89041644,train
+Narara Station,-33.39461057,151.34452641,train
+Narwee Station,-33.94767733,151.07058514,train
+Newcastle Beach Light Rail,-32.9275017,151.78633284,light_rail
+Newcastle Interchange,-32.92404091,151.75908192,light_rail
+Newcastle Interchange,-32.92404091,151.75908192,train
+Newtown Station,-33.89791301,151.17937737,train
+Ngara Light Rail,-33.80146212,151.0013821,light_rail
+Niagara Park Station,-33.38307663,151.35458344,train
+Normanhurst Station,-33.72082663,151.0970721,train
+North Ryde Station,-33.79421813,151.13798663,metro
+North Strathfield Station,-33.85918843,151.08818062,train
+North Sydney Station,-33.84115005,151.20741233,train
+North Wollongong Station,-34.41227335,150.89138888,train
+Norwest Station,-33.73461748,150.96352165,metro
+Oak Flats Station,-34.57194651,150.82034881,train
+Oatley Station,-33.9803847,151.07901413,train
+Olympic Park Station,-33.84659492,151.06932974,train
+Otford Station,-34.21070562,151.00582748,train
+Ourimbah Station,-33.35974907,151.36999584,train
+Paddy's Markets Light Rail,-33.87928172,151.20261045,light_rail
+Padstow Station,-33.95191691,151.03217663,train
+Panania Station,-33.95427746,150.99826036,train
+Parramatta Square Light Rail,-33.81555003,151.00513726,light_rail
+Parramatta Station,-33.81749025,151.005325,train
+Paterson Station,-32.60241443,151.61464838,train
+Pendle Hill Station,-33.80120445,150.9560804,train
+Pennant Hills Station,-33.73791201,151.07255151,train
+Penrith Station,-33.75014862,150.69651584,train
+Penrose Station,-34.67229417,150.21207796,train
+Penshurst Station,-33.96620899,151.0888473,train
+Petersham Station,-33.89386331,151.15557204,train
+Picton Station,-34.17919202,150.61260429,train
+Point Clare Station,-33.44625901,151.32841514,train
+Port Kembla North Station,-34.47272186,150.88757093,train
+Port Kembla Station,-34.47716242,150.90286886,train
+Prince Alfred Square Light Rail,-33.80906745,151.00525566,light_rail
+Pymble Station,-33.74477962,151.14226141,train
+Pyrmont Bay Light Rail,-33.8693385,151.1974886,light_rail
+QVB,-33.87169231,151.20665553,light_rail
+Quakers Hill Station,-33.72746287,150.88623397,train
+Queens Wharf Light Rail,-32.92638967,151.78174425,light_rail
+Randwick Light Rail,-33.91711225,151.24044655,light_rail
+Redfern Station,-33.89204769,151.19841906,train
+Regents Park Station,-33.8831901,151.02401965,train
+Revesby Station,-33.95251787,151.01519695,train
+Rhodes Station,-33.83049189,151.08704933,train
+Richmond Station,-33.59884642,150.75264112,train
+Riverstone Station,-33.67926177,150.86037985,train
+Riverwood Station,-33.95139401,151.05245738,train
+Robin Thomas Light Rail,-33.81692044,151.01120346,light_rail
+Rockdale Station,-33.95224818,151.13661619,train
+Rooty Hill Station,-33.77162507,150.84464747,train
+Rosehill Gardens Light Rail,-33.81811804,151.02448392,light_rail
+Roseville Station,-33.78443617,151.17766673,train
+Rouse Hill Station,-33.69181177,150.92416751,metro
+Royal Randwick Light Rail,-33.90515433,151.22873454,light_rail
+Rozelle Bay Light Rail,-33.87186612,151.17271525,light_rail
+Rydal Station,-33.48386625,150.03184368,train
+Sandgate Station,-32.87236185,151.70281244,train
+Scarborough Station,-34.26552566,150.96541923,train
+Schofields Station,-33.70438029,150.87377461,train
+Scone Station,-32.04684144,150.86698948,train
+Sefton Station,-33.88527733,151.01170402,train
+Seven Hills Station,-33.7743511,150.93612251,train
+Shellharbour Junction Station,-34.59134673,150.84470802,train
+Singleton Station,-32.57194064,151.16561028,train
+Springwood Station,-33.69905654,150.56366276,train
+St James Station,-33.87062216,151.21186309,train
+St Leonards Station,-33.8222319,151.19413439,train
+St Marys Station,-33.76210254,150.77518003,train
+St Peters Station,-33.90727298,151.18074263,train
+Stanmore Station,-33.89447424,151.16414803,train
+Stanwell Park Station,-34.22627936,150.98112787,train
+Strathfield Station,-33.87167201,151.09428565,train
+Summer Hill Station,-33.89044065,151.1387028,train
+Surry Hills Light Rail,-33.88813399,151.21195808,light_rail
+Sutherland Station,-34.03175379,151.05722202,train
+Sydenham Station,-33.91445896,151.16652644,metro
+Sydenham Station,-33.91445896,151.16652644,train
+Tahmoor Station,-34.22349207,150.59002115,train
+Tallawong Station,-33.69163119,150.90600569,metro
+Tallong Station,-34.71832308,150.08632116,train
+Tarana Station,-33.52424309,149.907495,train
+Tarro Station,-32.80898493,151.6695752,train
+Tascott Station,-33.45091719,151.31860852,train
+Taverners Hill Light Rail,-33.88903058,151.14525733,light_rail
+Telarah Station,-32.72338989,151.53981195,train
+Telopea Light Rail,-33.79440601,151.04114725,light_rail
+Tempe Station,-33.92390407,151.15660038,train
+Teralba Station,-32.96253817,151.60347199,train
+The Star Light Rail,-33.86751672,151.19516351,light_rail
+Thirroul Station,-34.31801562,150.91891203,train
+Thornleigh Station,-33.73189695,151.07815508,train
+Thornton Station,-32.78352147,151.63974686,train
+Toongabbie Station,-33.78738636,150.95144002,train
+Town Hall Station,-33.87353896,151.20692991,light_rail
+Town Hall Station,-33.87353896,151.20692991,train
+Towradgi Station,-34.38441889,150.90134686,train
+Tramway Avenue Light Rail,-33.81720469,151.01851443,light_rail
+Tuggerah Station,-33.30772394,151.42020531,train
+Turramurra Station,-33.73258635,151.12863644,train
+Turrella Station,-33.92979582,151.14033853,train
+UNSW Anzac Parade Light Rail,-33.91650596,151.22587044,light_rail
+UNSW High Street Light Rail,-33.91636479,151.23547074,light_rail
+Unanderra Station,-34.45457966,150.84615381,train
+Valley Heights Station,-33.70433308,150.58374369,train
+Victoria Cross Station,-33.83772725,151.20738465,metro
+Victoria Street Station,-32.75104739,151.59408427,train
+Villawood Station,-33.88083101,150.97685942,train
+Vineyard Station,-33.6503077,150.85115431,train
+Wahroonga Station,-33.71804522,151.1175449,train
+Waitara Station,-33.71036513,151.10494081,train
+Wallarobba Station,-32.49616061,151.6957196,train
+Wansey Road Light Rail,-33.91047387,151.23516799,light_rail
+Warabrook Station,-32.88738021,151.7101627,train
+Waratah Mills Light Rail,-33.89884682,151.14004964,light_rail
+Waratah Station,-32.90218201,151.73106539,train
+Warnervale Station,-33.24732964,151.44885085,train
+Warrawee Station,-33.72439856,151.12182775,train
+Warrimoo Station,-33.72140832,150.60273514,train
+Warwick Farm Station,-33.91331588,150.93509547,train
+Waterfall Station,-34.13490804,150.99454839,train
+Waterloo Station,-33.89744549,151.20023991,metro
+Waverton Station,-33.8376183,151.19738129,train
+Wentworth Falls Station,-33.70951523,150.37637161,train
+Wentworth Park Light Rail,-33.87441219,151.19402163,light_rail
+Wentworthville Station,-33.80706891,150.97236952,train
+Werrington Station,-33.75916137,150.75759387,train
+West Ryde Station,-33.80719476,151.09019218,train
+Westmead Hospital Light Rail,-33.80471256,150.99007051,light_rail
+Westmead Station,-33.80847754,150.98789237,light_rail
+Westmead Station,-33.80847754,150.98789237,train
+Windsor Station,-33.61375217,150.81121394,train
+Wingello Station,-34.69222428,150.15823395,train
+Wirragulla Station,-32.4629466,151.7424967,train
+Wolli Creek Station,-33.92853822,151.15411287,train
+Wollongong Station,-34.42701768,150.88819093,train
+Wollstonecraft Station,-33.83194479,151.19174851,train
+Wombarra Station,-34.27547946,150.95353511,train
+Wondabyne Station,-33.49214559,151.25699945,train
+Woodford Station,-33.73567216,150.48171549,train
+Woolooware Station,-34.04754097,151.14375723,train
+Woonona Station,-34.34963696,150.91517037,train
+Woy Woy Station,-33.48572837,151.32330628,train
+Wyee Station,-33.18007088,151.48708552,train
+Wynyard Station,-33.86594489,151.2061031,light_rail
+Wynyard Station,-33.86594489,151.2061031,train
+Wyong Station,-33.28539097,151.42523404,train
+Yagoona Station,-33.90721147,151.02459877,train
+Yallamundi Light Rail,-33.80996,151.02927179,light_rail
+Yennora Station,-33.86466386,150.97105333,train
+Yerrinbool Station,-34.37166317,150.54351765,train
+Zig Zag Station,-33.47177615,150.2020153,train

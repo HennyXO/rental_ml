@@ -15,3 +15,4 @@ saved_webpages_sale/
 # ingest/build_transit_stations.py parses it into data/transit_stations.csv
 # (which *is* committed -- it's just public station locations)
 data/*.zip
+data/*gtfs*/
