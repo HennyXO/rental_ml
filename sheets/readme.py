@@ -6,9 +6,9 @@ doesn't render it."""
 README_TEXT = """
 HOW THIS SPREADSHEET WORKS
 
-This is where we track rental listings, rate them, and note what actually matters to each of us -- so we can quickly agree on what's worth inspecting.
+This is where we track rental listings, rate them, and note what actually matters to each of us -- so we can quickly agree on what's worth inspecting. This spreadsheet is the only place you need to set or change any of that -- nothing here requires touching code or files on anyone's computer.
 
-This tab, and the other two, get refreshed from our shared database every so often (Leo runs a command for this) -- so if something looks off, or numbers change after you've edited them, just say so rather than assuming you broke it.
+This tab, and the other three, get refreshed from our shared database every so often (Leo runs a command for this) -- so if something looks off, or numbers change after you've edited them, just say so rather than assuming you broke it.
 
 ===== THE "LISTINGS" TAB =====
 
@@ -30,7 +30,18 @@ pagni_comment -- anything you want to note. "Kitchen looks tiny", "love the balc
 
 Everything with "leo_" or "_fit_score" in the name is the same idea for Leo, or the computer's own guess -- you don't need to touch those.
 
-"suggested_action" is the computer's best guess at what to do next, based on both our ratings and the hard filters (budget / bedrooms / suburb) already set up. It's a suggestion, not a decision -- we still decide together.
+"suggested_action" is the computer's best guess at what to do next, based on both our ratings and each of our hard filters (see the "Hard filters" tab below). It's a suggestion, not a decision -- we still decide together.
+
+===== THE "HARD FILTERS" TAB =====
+
+These are your dealbreakers -- anything failing even one of these gets automatically flagged to skip, before it's worth either of us reading it properly. One row per filter, your column is pagni_value. See "what_this_means" for what each one does; a blank cell means that filter doesn't apply to you at all (not zero, just switched off). For example:
+
+- max_weekly_rent_aud: write a number, e.g. 1100
+- min_bedrooms: write a number, e.g. 3
+- allowed_suburbs: write suburb names separated by commas, e.g. Glebe, Leichhardt, Redfern -- leave blank to allow any suburb
+- pet_friendly_required: write TRUE if you only want pet-friendly places, otherwise leave blank
+
+Change these any time -- if your budget or suburb list shifts, just update the cell.
 
 ===== THE "PREFERENCES" TAB =====
 
@@ -53,7 +64,7 @@ A couple of examples to calibrate:
 
 You don't need to fill in every row -- only the ones you actually have an opinion on. Blank just means "no opinion," not zero.
 
-If something is a genuine dealbreaker (e.g. "must be under $X" or "must be 3 bedrooms"), tell Leo directly rather than trying to encode it as a very negative weight here -- those work differently (they auto-skip a listing entirely, rather than just lowering its score) and are set up separately.
+If something is a genuine dealbreaker (e.g. "must be under $X" or "must be 3 bedrooms"), put it in the "Hard filters" tab instead of a very negative weight here -- those work differently (they auto-skip a listing entirely, rather than just lowering its score).
 
 Nothing here is final -- change your numbers any time your thinking changes, and the next refresh will pick them up.
 """

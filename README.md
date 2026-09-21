@@ -149,20 +149,26 @@ do the feature-ranking exercise together. One-time setup:
 
 Then:
 ```bash
-python -m sheets.publish     # DB -> Sheet: listings, fit scores, a "Preferences" tab
-python -m sheets.sync_back   # Sheet -> DB: ratings, status, comments, preference weights
+python -m sheets.publish     # DB -> Sheet: listings, fit scores, "Preferences" + "Hard filters" tabs
+python -m sheets.sync_back   # Sheet -> DB/yaml: ratings, status, comments, weights, hard filters
 ```
 Both are run manually, on demand -- no scheduling yet. **Run `sync_back`
 before `publish`** if you've made edits in the Sheet you want kept:
 `publish` does a full overwrite of the computed columns and doesn't try to
 merge concurrent edits.
 
-The "Preferences" tab is also how the ranking exercise works: one row per
-feature, a `<name>_weight` column each of you fills in directly in the
-Sheet (mobile-friendly, no file-passing) -- `sync_back` regenerates
-`preferences/<name>.yaml`'s weights from whatever's there. Hard filters
-(budget, bedrooms, suburbs) still live only in the yaml files -- edit
-those directly, they're not part of the Sheet exercise.
+The Sheet is the only place either person needs to set or adjust their own
+preferences day to day -- no yaml editing required, which matters since
+one of you may not have this repo at all. The "Preferences" tab is the
+weighted-ranking exercise: one row per feature (with a plain-English
+`what_this_means` column), a `<name>_weight` column each of you fills in
+directly. The "Hard filters" tab is the actual dealbreakers -- budget,
+minimum bedrooms, allowed suburbs, pet-friendly required, max commute --
+one row per filter, a `<name>_value` column each of you fills in; a blank
+cell means that filter doesn't apply to you. `sync_back` regenerates
+`preferences/<name>.yaml` (both `hard_filters` and `weights`) from
+whatever's currently in the Sheet -- hand-editing the yaml directly still
+works, but the next `sync_back` overwrites it.
 
 ## Feature catalogue
 
