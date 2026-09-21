@@ -7,7 +7,8 @@ __pycache__/
 # personal/private -- see README.md "Public repo" section
 preferences/*.yaml
 !preferences/example.yaml
-google_sheets_service_account.json
+*service*account*.json
+*credentials*.json
 data/db/
 data/exports/
 saved_webpages/
