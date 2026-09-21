@@ -7,15 +7,13 @@ requests to realestate.com.au — see README.md for why), parse them into
 above/below what their features predict. Full workflow in README.md;
 feature list in `ingest/schema.py`.
 
+This repo is public. Code and pipeline structure are meant to be shared;
+personal data (what you're actually looking for, the listings you've
+captured, your office address, API keys) is not. See "Public repo" in
+README.md for what that means in practice.
+
 ## Listing preferences
 
-Moving in with a mate; both WFH a lot.
-
-- **Primary target: 3-bedroom places.**
-- **Also consider 2-bedroom + study/sunroom/home office** as a substitute
-  for the third bedroom.
-- The "third bedroom" just needs to fit two desks as a WFH office — it's
-  fine if it's the smallest bedroom. If a floorplan is available, check
-  it and use the `fits_two_desks_3rd_bedroom` column (manual, in the DB)
-  to record the verdict; the parser can't judge this from a floorplan
-  image, so it's always filled in by hand.
+Current criteria live in `LISTING_PREFERENCES.local.md` (gitignored --
+copy it from `LISTING_PREFERENCES.example.md` if it doesn't exist yet).
+Read that file for what's actually being looked for right now.

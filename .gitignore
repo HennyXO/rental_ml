@@ -3,6 +3,9 @@ __pycache__/
 *.pyc
 .env
 .DS_Store
+
+# personal/private -- see README.md "Public repo" section
+LISTING_PREFERENCES.local.md
 data/db/
 data/exports/
 saved_webpages/

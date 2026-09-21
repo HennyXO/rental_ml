@@ -5,8 +5,24 @@ already browsing, extract structured features (bedrooms, aircon, size,
 commute time, etc.), store them, and fit a simple model that flags
 listings priced above or below what their features would predict.
 
-See [`CLAUDE.md`](CLAUDE.md) for the current listing preferences (bedroom
-count, WFH requirements) driving what's worth capturing.
+Current listing preferences (bedroom count, WFH requirements, etc.) live
+in `LISTING_PREFERENCES.local.md`, which is gitignored -- see "Public
+repo" below for why.
+
+## Public repo
+
+This repo is public: the code and pipeline are meant to be shared, but
+nothing personal should end up in git. Gitignored and never committed:
+- `.env` -- your office address and Google Maps API key.
+- `LISTING_PREFERENCES.local.md` -- what you're actually looking for.
+  Copy `LISTING_PREFERENCES.example.md` to create it.
+- `saved_webpages/` and `saved_webpages_sale/` -- the raw HTML pages
+  you've captured.
+- `data/db/` and `data/exports/` -- the parsed listings themselves
+  (addresses, prices, your computed commute times).
+
+If you fork or reuse this, everything above is yours to fill in locally;
+none of it is needed to run the code itself.
 
 ## Why manual capture, not a scraper
 
@@ -31,10 +47,13 @@ cp .env.example .env
 Edit `.env`:
 - `OFFICE_ADDRESS` -- your commute destination.
 - `GOOGLE_MAPS_API_KEY` -- a key from your own Google Cloud project with the
-  **Geocoding API** and **Distance Matrix API** enabled and billing active.
-  There's a free monthly allowance; this project caches every address
-  lookup in the `commute_cache` DB table so you're never billed twice for
-  the same address.
+  **Geocoding API** and **Routes API** enabled and billing active. There's
+  a free monthly allowance; this project caches every address lookup in
+  the `commute_cache` DB table so you're never billed twice for the same
+  address.
+
+Also copy `LISTING_PREFERENCES.example.md` to `LISTING_PREFERENCES.local.md`
+and fill in what you're actually looking for -- see "Public repo" above.
 
 ## Workflow
 
