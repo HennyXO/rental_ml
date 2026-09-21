@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.DS_Store
+data/db/
+data/exports/
+saved_webpages/
+saved_webpages_sale/
