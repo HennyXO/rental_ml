@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import pandas as pd
 
-from ingest.schema import AMENITY_KEYWORDS, STATION_MODES
+from ingest.schema import AMENITY_KEYWORDS, POI_CATEGORIES
 
 NUMERIC_COLUMNS = [
     "bedrooms", "bathrooms", "parking_spaces",
     "land_size_sqm", "floor_size_sqm",
     "commute_driving_minutes", "commute_transit_minutes", "straight_line_km",
-] + [f"nearest_{mode}_station_km" for mode in STATION_MODES] \
-  + [f"nearest_{mode}_station_walk_minutes" for mode in STATION_MODES]
+] + [f"nearest_{cat}_km" for cat in POI_CATEGORIES] \
+  + [f"nearest_{cat}_walk_minutes" for cat in POI_CATEGORIES]
 AMENITY_COLUMNS = list(AMENITY_KEYWORDS)
 CATEGORICAL_COLUMNS = ["property_type", "suburb"]
 TARGET_COLUMN = "weekly_rent_aud"

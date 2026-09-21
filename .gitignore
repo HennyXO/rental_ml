@@ -5,7 +5,9 @@ __pycache__/
 .DS_Store
 
 # personal/private -- see README.md "Public repo" section
-LISTING_PREFERENCES.local.md
+preferences/*.yaml
+!preferences/example.yaml
+google_sheets_service_account.json
 data/db/
 data/exports/
 saved_webpages/

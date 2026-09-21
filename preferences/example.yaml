@@ -1,0 +1,37 @@
+# Copy this file to preferences/<your-name>.yaml and fill in your own
+# values (that file is gitignored -- personal, not committed). See
+# ingest/schema.py for the full list of column names you can reference
+# here (ALL_COLUMN_NAMES) -- anything in there is fair game for a filter
+# or a weight.
+#
+# Eventually these files get regenerated from the shared Google Sheet's
+# "Preferences" tab (see sheets/sync_back.py) once both of you have ranked
+# things there -- treat this as a reasonable starting point, not something
+# to agonize over by hand.
+
+hard_filters:
+  # A listing failing ANY of these gets auto-flagged to skip -- this is
+  # the "screen out quickly" mechanism. Key naming is read literally by
+  # score/fit_score.py: max_<column>, min_<column>, <column>_required.
+  max_weekly_rent_aud: 1200
+  min_bedrooms: 3
+  max_commute_transit_minutes: 45
+  pet_friendly_required: false
+
+weights:
+  # Roughly -1..1. Positive = more of this is better; negative = less is
+  # better (e.g. commute time, distance to a station). 0 or omitted =
+  # don't care. Only listed here for illustration -- add/remove whatever
+  # actually matters to you.
+  weekly_rent_aud: -0.6
+  commute_transit_minutes: -0.5
+  nearest_train_station_walk_minutes: -0.4
+  air_conditioning: 0.5
+  study: 0.5
+  built_in_wardrobes: 0.3
+  natural_light: 0.4
+  security_features: 0.2
+  nearest_supermarket_km: -0.2
+  nearest_park_km: -0.2
+  nearest_school_km: 0.0
+  nearest_beach_km: 0.0
