@@ -29,10 +29,14 @@ def open_sheet():
 
 
 def ensure_worksheet(sheet, title: str, rows: int = 300, cols: int = 40):
-    try:
-        return sheet.worksheet(title)
-    except gspread.WorksheetNotFound:
-        return sheet.add_worksheet(title=title, rows=rows, cols=cols)
+    """Case-insensitive lookup before creating -- Google Sheets treats tab
+    names as unique case-insensitively, so an exact-case-only lookup can
+    report "not found" for a tab that exists under different casing, then
+    fail to create a new one because it "already exists" after all."""
+    for ws in sheet.worksheets():
+        if ws.title.lower() == title.lower():
+            return ws
+    return sheet.add_worksheet(title=title, rows=rows, cols=cols)
 
 
 def write_dataframe(worksheet, df: pd.DataFrame) -> None:

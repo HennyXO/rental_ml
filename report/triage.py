@@ -61,9 +61,10 @@ def build_report() -> pd.DataFrame:
     df = score_all(df)
     df["suggested_action"] = df.apply(lambda row: suggest_action(row, names), axis=1)
 
-    columns = ["listing_id", "address", "suburb", "weekly_rent_aud", "bedrooms", "status", "suggested_action"]
+    columns = ["listing_id", "address", "suburb", "url", "weekly_rent_aud", "bedrooms",
+               "status", "suggested_action"]
     for name in names:
-        columns += [f"{name}_hard_filter_pass", f"{name}_fit_score", f"{name}_rating"]
+        columns += [f"{name}_hard_filter_pass", f"{name}_fit_score", f"{name}_rating", f"{name}_comment"]
     return df[columns]
 
 
