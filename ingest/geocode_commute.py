@@ -3,6 +3,7 @@ repeat ingests never re-bill the Google Maps API for an address we've
 already looked up."""
 from __future__ import annotations
 
+import csv
 import math
 import sqlite3
 from datetime import datetime, timezone
@@ -10,6 +11,7 @@ from datetime import datetime, timezone
 import requests
 
 import config
+from ingest.schema import STATION_MODES
 
 GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 # The legacy Distance Matrix API (maps.googleapis.com/maps/api/distancematrix)
@@ -89,6 +91,63 @@ def _route_matrix_minutes(origin_latlng: tuple[float, float],
     return _duration_seconds_to_minutes(element.get("duration"))
 
 
+_stations_by_mode_cache: dict[str, list] | None = None
+
+
+def _load_stations() -> dict[str, list[tuple[str, float, float]]]:
+    """Loads data/transit_stations.csv (built once by
+    ingest/build_transit_stations.py from a downloaded GTFS zip). Returns
+    {} for a mode with no data yet -- callers just get None results,
+    nothing crashes if the file hasn't been built."""
+    global _stations_by_mode_cache
+    if _stations_by_mode_cache is not None:
+        return _stations_by_mode_cache
+
+    stations_by_mode: dict[str, list[tuple[str, float, float]]] = {mode: [] for mode in STATION_MODES}
+    if config.TRANSIT_STATIONS_CSV.exists():
+        with config.TRANSIT_STATIONS_CSV.open(encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if row["mode"] in stations_by_mode:
+                    stations_by_mode[row["mode"]].append(
+                        (row["name"], float(row["lat"]), float(row["lon"]))
+                    )
+    _stations_by_mode_cache = stations_by_mode
+    return stations_by_mode
+
+
+def _nearest_station(lat, lon, mode: str) -> tuple[str, float, float, float] | tuple[None, None, None, None]:
+    """Returns (name, lat, lon, km) for the nearest station of `mode`."""
+    if lat is None or lon is None:
+        return None, None, None, None
+    best = None
+    for name, s_lat, s_lon in _load_stations().get(mode, []):
+        km = haversine_km(lat, lon, s_lat, s_lon)
+        if best is None or km < best[3]:
+            best = (name, s_lat, s_lon, km)
+    return best if best else (None, None, None, None)
+
+
+def get_nearest_stations(lat, lon) -> dict:
+    """nearest_<mode>_station / _km / _walk_minutes for train/metro/light_rail.
+    Walk time costs one Routes API call per mode, but only to the single
+    nearest candidate (found first via free local haversine math), so at
+    most 3 extra calls per listing -- not one per station."""
+    result = {}
+    for mode in STATION_MODES:
+        name, s_lat, s_lon, km = _nearest_station(lat, lon, mode)
+        walk_minutes = _route_matrix_minutes((lat, lon), (s_lat, s_lon), "WALK") \
+            if name is not None else None
+        result[f"nearest_{mode}_station"] = name
+        result[f"nearest_{mode}_station_km"] = km
+        result[f"nearest_{mode}_station_walk_minutes"] = walk_minutes
+    return result
+
+
+_STATION_CACHE_COLUMNS = [
+    col for mode in STATION_MODES
+    for col in (f"nearest_{mode}_station", f"nearest_{mode}_station_km", f"nearest_{mode}_station_walk_minutes")
+]
+
 _office_coords_cache: tuple[float, float] | None | object = "unset"
 
 
@@ -100,15 +159,20 @@ def _office_coords() -> tuple[float, float] | None:
 
 
 def get_commute(conn: sqlite3.Connection, listing_address: str) -> dict:
-    """Returns {lat, lon, driving_minutes, transit_minutes, straight_line_km},
-    using the cache table when available."""
+    """Returns {lat, lon, driving_minutes, transit_minutes, straight_line_km,
+    nearest_<mode>_station / _km / _walk_minutes}, using the cache table
+    when available."""
+    select_cols = ["lat", "lon", "driving_minutes", "transit_minutes"] + _STATION_CACHE_COLUMNS
     row = conn.execute(
-        "SELECT lat, lon, driving_minutes, transit_minutes FROM commute_cache WHERE address = ?",
+        f"SELECT {', '.join(select_cols)} FROM commute_cache WHERE address = ?",
         (listing_address,),
     ).fetchone()
 
     if row:
-        lat, lon, driving_minutes, transit_minutes = row
+        cached = dict(zip(select_cols, row))
+        lat, lon = cached["lat"], cached["lon"]
+        driving_minutes, transit_minutes = cached["driving_minutes"], cached["transit_minutes"]
+        station_fields = {col: cached[col] for col in _STATION_CACHE_COLUMNS}
     else:
         coords = geocode(listing_address)
         lat, lon = coords if coords else (None, None)
@@ -117,11 +181,17 @@ def get_commute(conn: sqlite3.Connection, listing_address: str) -> dict:
             if office_coords and lat else None
         transit_minutes = _route_matrix_minutes(office_coords, (lat, lon), "TRANSIT") \
             if office_coords and lat else None
+        station_fields = get_nearest_stations(lat, lon)
+
+        insert_cols = ["address", "lat", "lon", "driving_minutes", "transit_minutes"] \
+            + _STATION_CACHE_COLUMNS + ["computed_at"]
+        values = [listing_address, lat, lon, driving_minutes, transit_minutes] \
+            + [station_fields[col] for col in _STATION_CACHE_COLUMNS] \
+            + [datetime.now(timezone.utc).isoformat()]
         conn.execute(
-            "INSERT OR REPLACE INTO commute_cache "
-            "(address, lat, lon, driving_minutes, transit_minutes, computed_at) VALUES (?, ?, ?, ?, ?, ?)",
-            (listing_address, lat, lon, driving_minutes, transit_minutes,
-             datetime.now(timezone.utc).isoformat()),
+            f"INSERT OR REPLACE INTO commute_cache ({', '.join(insert_cols)}) "
+            f"VALUES ({', '.join('?' for _ in insert_cols)})",
+            values,
         )
         conn.commit()
 
@@ -134,4 +204,5 @@ def get_commute(conn: sqlite3.Connection, listing_address: str) -> dict:
         "commute_driving_minutes": driving_minutes,
         "commute_transit_minutes": transit_minutes,
         "straight_line_km": straight_line_km,
+        **station_fields,
     }

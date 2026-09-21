@@ -57,23 +57,36 @@ MANUAL_COLUMN_NAMES = ["fits_two_desks_3rd_bedroom", "manual_notes"]
 
 AMENITY_COLUMNS = [(name, "INTEGER") for name in AMENITY_KEYWORDS]
 
-ALL_COLUMNS = CORE_COLUMNS + AMENITY_COLUMNS
+# Transit modes we compute nearest-station distance/walk-time for. Station
+# locations come from TfNSW's GTFS feed (see ingest/build_transit_stations.py)
+# -- route_type 2 = train, 1 = metro, 0 = light rail, per the GTFS spec.
+STATION_MODES = ["train", "metro", "light_rail"]
+STATION_COLUMNS = [
+    (f"nearest_{mode}_station", "TEXT") for mode in STATION_MODES
+] + [
+    (f"nearest_{mode}_station_km", "REAL") for mode in STATION_MODES
+] + [
+    (f"nearest_{mode}_station_walk_minutes", "REAL") for mode in STATION_MODES
+]
+
+ALL_COLUMNS = CORE_COLUMNS + AMENITY_COLUMNS + STATION_COLUMNS
 ALL_COLUMN_NAMES = [name for name, _ in ALL_COLUMNS]
 
 LISTINGS_DDL = "CREATE TABLE IF NOT EXISTS listings (\n    " + ",\n    ".join(
     f"{name} {sqltype}" for name, sqltype in ALL_COLUMNS
 ) + "\n)"
 
-COMMUTE_CACHE_DDL = """
-CREATE TABLE IF NOT EXISTS commute_cache (
-    address TEXT PRIMARY KEY,
-    lat REAL,
-    lon REAL,
-    driving_minutes REAL,
-    transit_minutes REAL,
-    computed_at TEXT
-)
-"""
+COMMUTE_CACHE_DDL = "CREATE TABLE IF NOT EXISTS commute_cache (\n    " + ",\n    ".join(
+    [
+        "address TEXT PRIMARY KEY",
+        "lat REAL",
+        "lon REAL",
+        "driving_minutes REAL",
+        "transit_minutes REAL",
+    ] + [f"{name} {sqltype}" for name, sqltype in STATION_COLUMNS] + [
+        "computed_at TEXT",
+    ]
+) + "\n)"
 
 
 def get_connection(db_path):

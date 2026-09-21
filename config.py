@@ -15,3 +15,6 @@ RAW_HTML_RENT_DIR = ROOT_DIR / "saved_webpages"
 RAW_HTML_SALE_DIR = ROOT_DIR / "saved_webpages_sale"  # phase 2, not used yet
 DB_PATH = DATA_DIR / "db" / "listings.sqlite"
 EXPORT_DIR = DATA_DIR / "exports"
+# Small, derived, non-personal -- committed to git. Built once by
+# ingest/build_transit_stations.py from a downloaded GTFS zip.
+TRANSIT_STATIONS_CSV = DATA_DIR / "transit_stations.csv"

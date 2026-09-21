@@ -111,6 +111,36 @@ and fill in what you're actually looking for -- see "Public repo" above.
 See `ingest/schema.py` -- it's the single source of truth for every column
 in the database, used by the parser, the ingester, and the model.
 
+## Nearest station (train / metro / light rail)
+
+One-time setup, then it's free forever:
+
+1. Create a free account at
+   [opendata.transport.nsw.gov.au](https://opendata.transport.nsw.gov.au)
+   and download the **"Timetables Complete GTFS"** zip (covers every
+   operator -- we only use train/metro/light-rail from it).
+2. ```bash
+   python -m ingest.build_transit_stations path/to/downloaded_gtfs.zip
+   ```
+   Parses it once into `data/transit_stations.csv` (station name, lat,
+   lon, mode) -- small and non-personal, so it's committed to git. The
+   raw GTFS zip itself is gitignored (large, easily re-downloaded).
+3. Re-run `python -m ingest.ingest --force` to backfill nearest-station
+   fields for listings already ingested.
+
+For each listing, `ingest.geocode_commute.get_nearest_stations` finds the
+nearest station per mode via local straight-line math (free, instant),
+then spends one Routes API walking-time call per mode on just that
+nearest candidate (so at most 3 extra API calls per listing, not one per
+station) -- cached in `commute_cache` like the office commute is.
+Train/metro/light-rail are kept as separate modes because GTFS's own
+`route_type` field distinguishes them authoritatively (0 = light rail,
+1 = metro, 2 = train), which is more reliable than guessing from a
+generic "nearby transit station" search.
+
+If you skip this setup, the `nearest_*_station*` columns just stay null
+-- everything else keeps working.
+
 ## What the parser actually relies on
 
 Verified against a real saved listing. The reliable sources on a
