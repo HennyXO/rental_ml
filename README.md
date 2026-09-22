@@ -61,8 +61,9 @@ Edit `.env`:
   Google Sheet" below. Everything else works fine without these set.
 
 Also copy `preferences/example.yaml` to `preferences/<your-name>.yaml` for
-each person and fill in your own hard filters / weights (or do it via the
-Sheet's "Preferences" tab once that's set up -- see below).
+each person and fill in your own hard filters / preferred suburbs /
+weights (or do it via the Sheet's "Hard filters" and "Preferences" tabs
+once that's set up -- see below).
 
 ## Workflow
 
@@ -248,3 +249,14 @@ A trained "predict this person's rating from features" model is also a
 natural later step once `ratings` has ~30-50+ rows -- more directly useful
 than the price model, but needs volume first; `score/fit_score.py` covers
 the gap until then.
+
+**Per-person named anchor points** (office, nightlife hub, gym, etc. --
+each with its own commute time, rather than everyone sharing one
+`OFFICE_ADDRESS`) was scoped and explicitly deferred (2026-09-22):
+addresses would move from `.env` into personal preferences, commute to
+each gets computed on the fly and cached in a new table instead of stored
+per-listing (since it's no longer one shared value), and a new Sheet tab
+would let each person name their own anchor points. Worth building once a
+second/different anchor point is actually needed in practice -- Pagni's
+WFH-only case already works today with zero new code, by just leaving
+office commute unweighted in his preferences.
