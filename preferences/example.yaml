@@ -1,32 +1,36 @@
 # Copy this file to preferences/<your-name>.yaml and fill in your own
-# values (that file is gitignored -- personal, not committed). See
+# values (that file is gitignored, personal, not committed). See
 # ingest/schema.py for the full list of column names you can reference
-# here (ALL_COLUMN_NAMES) -- anything in there is fair game for a filter
+# here (ALL_COLUMN_NAMES); anything in there is fair game for a filter
 # or a weight.
 #
 # Eventually these files get regenerated from the shared Google Sheet's
 # "Preferences" / "Hard filters" tabs (see sheets/sync_back.py) once
-# you've filled things in there -- treat this as a reasonable starting
+# you've filled things in there. Treat this as a reasonable starting
 # point, not something to agonize over by hand.
 
 hard_filters:
   # A listing failing ANY of these gets auto-flagged to skip, before
-  # either of you spends time reading it -- this is the "screen out
+  # either of you spends time reading it. This is the "screen out
   # quickly" mechanism. Key naming is read literally by score/fit_score.py:
   # max_<column>, min_<column>, allowed_<column> (must be one of a list),
-  # <column>_required.
+  # excluded_<column> (must NOT be one of a list), <column>_required. The
+  # part after the prefix must match a real column name exactly, e.g.
+  # excluded_suburb (singular), since the DB column is "suburb".
   max_weekly_rent_aud: 1200
   min_bedrooms: 3
   max_commute_transit_minutes: 45
   pet_friendly_required: false
-  # allowed_suburbs is a HARD cutoff -- a listing outside this list gets
-  # auto-skipped, no exceptions. Often too strict (a great listing one
-  # suburb over still gets thrown away); leave it blank/omitted like this
-  # unless you genuinely never want to hear about anywhere else, and use
-  # preferred_suburbs below for a softer version instead.
-  # allowed_suburbs: ["Glebe", "Leichhardt"]
+  # excluded_suburb is for genuine dealbreaker suburbs: a listing in one
+  # of these is auto-skipped, no exceptions. Much more usable as a hard
+  # filter than the allow-list version (allowed_suburb): most people don't
+  # have a fixed list of the ONLY suburbs they'd live in, but do have a
+  # few they'd rule out entirely. Leave blank/omitted if you don't have
+  # any, and use preferred_suburbs below for suburbs you actively like
+  # (a soft boost, not exclusionary).
+  # excluded_suburb: ["Parramatta", "Blacktown"]
 
-# A SOFT suburb preference -- doesn't exclude anything, just boosts the
+# A SOFT suburb preference: doesn't exclude anything, just boosts the
 # score for listings in these suburbs. Weight how much via
 # weights.preferred_suburbs below.
 preferred_suburbs: ["Glebe", "Leichhardt", "Newtown"]
@@ -34,8 +38,13 @@ preferred_suburbs: ["Glebe", "Leichhardt", "Newtown"]
 weights:
   # Roughly -1..1. Positive = more of this is better; negative = less is
   # better (e.g. commute time, distance to a station). 0 or omitted =
-  # don't care. Only listed here for illustration -- add/remove whatever
+  # don't care. Only listed here for illustration; add/remove whatever
   # actually matters to you.
+  #
+  # If you're using the Sheet instead of this file directly, the
+  # Preferences tab shows a friendlier -5..5 whole-number scale and
+  # converts to/from this -1..1 range automatically (see
+  # sheets/sync_back.py); you don't need to do that math by hand.
   weekly_rent_aud: -0.6
   preferred_suburbs: 0.5
   commute_transit_minutes: -0.5

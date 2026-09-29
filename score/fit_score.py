@@ -1,10 +1,10 @@
 """Per-person hard-filter check + weighted fit score, computed
-transparently from features already in the catalogue -- useful from
+transparently from features already in the catalogue, useful from
 listing #1, no ML training required. See preferences/example.yaml for the
 file format this reads.
 
 fit_score is a *relative ranking within the current dataset*, scaled to
-look like a 0-10 gut rating for easy comparison -- not a calibrated
+look like a 0-10 gut rating for easy comparison, not a calibrated
 absolute score. With few listings it will look more decisive than it
 really is; treat it as a sort order and a "why" (via hard_filter_reasons),
 not gospel.
@@ -15,6 +15,12 @@ import pandas as pd
 import yaml
 
 import config
+from ingest.schema import AMENITY_KEYWORDS
+
+# Yes/no columns: scored as their real 0/1 rather than min-max rescaled,
+# so a lone "yes" still counts when every other listing is unreviewed
+# (min-max over a single distinct value flattens everyone to 0.5).
+BOOLEAN_COLUMNS = set(AMENITY_KEYWORDS) | {"fits_two_desks_3rd_bedroom"}
 
 
 def people() -> list[str]:
@@ -60,6 +66,11 @@ def _check_hard_filters(row: pd.Series, hard_filters: dict) -> list[str]:
             value = row.get(column)
             if pd.notna(value) and threshold and value not in threshold:
                 failures.append(f"{column} = {value!r} not in allowed {threshold}")
+        elif key.startswith("excluded_"):
+            column = key[len("excluded_"):]
+            value = row.get(column)
+            if pd.notna(value) and threshold and value in threshold:
+                failures.append(f"{column} = {value!r} is in excluded list {threshold}")
         elif key.endswith("_required"):
             column = key[: -len("_required")]
             value = row.get(column)
@@ -67,8 +78,8 @@ def _check_hard_filters(row: pd.Series, hard_filters: dict) -> list[str]:
                 failures.append(f"{column} required but missing/false")
         else:
             raise ValueError(
-                f"Unrecognised hard_filters key '{key}' -- expected a max_/min_/allowed_ "
-                f"prefix or a _required suffix"
+                f"Unrecognised hard_filters key '{key}' -- expected a max_/min_/allowed_/"
+                f"excluded_ prefix or a _required suffix"
             )
     return failures
 
@@ -99,9 +110,11 @@ def score_person(df: pd.DataFrame, name: str) -> pd.DataFrame:
             continue
         if column == "preferred_suburbs":
             # special case: not a df column to normalize, but membership
-            # in the person's own preferred_suburbs list -- already 0/1,
+            # in the person's own preferred_suburbs list, already 0/1,
             # like a boolean amenity, so no normalization needed.
             values = df["suburb"].isin(prefs["preferred_suburbs"]).astype(float)
+        elif column in BOOLEAN_COLUMNS and column in df.columns:
+            values = pd.to_numeric(df[column], errors="coerce").fillna(0.5)  # unreviewed = neutral
         elif column in df.columns:
             values = _normalize(df[column])
         else:

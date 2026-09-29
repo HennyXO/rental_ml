@@ -4,7 +4,7 @@ __pycache__/
 .env
 .DS_Store
 
-# personal/private -- see README.md "Public repo" section
+# personal/private, see README.md "Public repo" section
 preferences/*.yaml
 !preferences/example.yaml
 *service*account*.json
@@ -16,6 +16,6 @@ saved_webpages_sale/
 
 # raw GTFS download is large (~100s of MB) and not needed after
 # ingest/build_transit_stations.py parses it into data/transit_stations.csv
-# (which *is* committed -- it's just public station locations)
+# (which *is* committed, it's just public station locations)
 data/*.zip
 data/*gtfs*/

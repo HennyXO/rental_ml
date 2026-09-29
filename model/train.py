@@ -1,13 +1,13 @@
 """Fit a price model and report predicted vs. actual rent per listing.
 
 A positive residual (actual - predicted) suggests a listing is priced
-*above* what its features would predict -- possibly overvalued. A negative
+*above* what its features would predict, possibly overvalued. A negative
 residual suggests it may be underpriced.
 
-With very few listings this is closer to a toy than a real valuation tool
--- treat anything under ~50 listings as indicative at best, and cross-check
-against simple suburb-level $/sqm comparisons rather than trusting the
-model alone.
+With very few listings this is closer to a toy than a real valuation
+tool. Treat anything under ~50 listings as indicative at best, and
+cross-check against simple suburb-level $/sqm comparisons rather than
+trusting the model alone.
 
 Usage: python -m model.train
 """
@@ -55,6 +55,22 @@ def evaluate(model, X, y, listing_ids) -> pd.DataFrame:
     result["residual"] = result["actual_weekly_rent"] - result["predicted_weekly_rent"]
     result["pct_over_or_under"] = (result["residual"] / result["predicted_weekly_rent"] * 100).round(1)
     return result.sort_values("residual", ascending=False)
+
+
+def predict_value(df: pd.DataFrame) -> pd.DataFrame:
+    """The daily 'is this good value' signal for report/triage.py and
+    sheets/publish.py. Ridge specifically, not the gradient-boosted
+    model below, since it degrades more gracefully when evaluate() falls
+    back to in-sample fitting under MIN_ROWS_FOR_CV rows, the common case
+    at this project's scale. Empty (but correctly columned) if there's
+    nothing to predict on yet."""
+    X, y, listing_ids = build_feature_matrix(df)
+    if len(X) == 0:
+        return pd.DataFrame(columns=[
+            "listing_id", "predicted_weekly_rent", "residual", "pct_over_or_under",
+        ])
+    result = evaluate(Ridge(alpha=1.0), X, y, listing_ids)
+    return result[["listing_id", "predicted_weekly_rent", "residual", "pct_over_or_under"]]
 
 
 def main() -> None:

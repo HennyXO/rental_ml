@@ -29,7 +29,7 @@ def open_sheet():
 
 
 def ensure_worksheet(sheet, title: str, rows: int = 300, cols: int = 40):
-    """Case-insensitive lookup before creating -- Google Sheets treats tab
+    """Case-insensitive lookup before creating. Google Sheets treats tab
     names as unique case-insensitively, so an exact-case-only lookup can
     report "not found" for a tab that exists under different casing, then
     fail to create a new one because it "already exists" after all."""

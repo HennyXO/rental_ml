@@ -1,9 +1,9 @@
 """One-time: pull school/supermarket/park/beach locations for Greater Sydney
 from OpenStreetMap's Overpass API into data/poi.csv (name, lat, lon,
-category). Free, no API key or account needed -- unlike TfNSW's GTFS feed,
+category). Free, no API key or account needed. Unlike TfNSW's GTFS feed,
 this is a live query, not a bulk download, so it's a genuine "run it once
 and you're done" step (re-run occasionally if you want fresher data, but
-don't hammer the public Overpass instance -- it's a shared community
+don't hammer the public Overpass instance, it's a shared community
 resource).
 
 Train/metro/light-rail stations are handled separately by
@@ -25,7 +25,7 @@ import config
 
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 
-# Greater Sydney bounding box (south, west, north, east) -- wide enough to
+# Greater Sydney bounding box (south, west, north, east), wide enough to
 # cover the metro area without pulling all of NSW.
 BBOX = (-34.3, 150.4, -33.4, 151.5)
 
@@ -49,7 +49,7 @@ def _build_query(tags: list[tuple[str, str]]) -> str:
 
 
 def fetch_category(category: str, tags: list[tuple[str, str]], retries: int = 2) -> list[dict]:
-    """One Overpass request per category -- the combined query for all four
+    """One Overpass request per category: the combined query for all four
     timed out server-side (504) on the shared public instance; splitting
     keeps each request small enough to actually complete, and means one
     slow/failing category doesn't lose the others. 'park' in particular has
@@ -109,7 +109,7 @@ def build(out_path) -> None:
             el_tags = el.get("tags", {})
             if el["type"] == "node":
                 lat, lon = el.get("lat"), el.get("lon")
-            else:  # way -- use the computed centroid ("out center" in the query)
+            else:  # way: use the computed centroid ("out center" in the query)
                 center = el.get("center") or {}
                 lat, lon = center.get("lat"), center.get("lon")
             if lat is None or lon is None:

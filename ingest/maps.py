@@ -1,7 +1,7 @@
 """Low-level Google Maps Platform helpers shared by office-commute lookups
 (ingest/geocode_commute.py) and nearest-point-of-interest lookups
 (ingest/poi.py). Neither of those modules should call requests.get/post on
-these URLs directly -- go through here so there's one place that knows the
+these URLs directly; go through here so there's one place that knows the
 current API shapes."""
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ import config
 
 GEOCODE_URL = "https://maps.googleapis.com/maps/api/geocode/json"
 # The legacy Distance Matrix API (maps.googleapis.com/maps/api/distancematrix)
-# is disabled by default on new Google Cloud projects -- Google now points
+# is disabled by default on new Google Cloud projects. Google now points
 # new projects at the Routes API instead. See:
 # https://developers.google.com/maps/documentation/routes/compute_route_matrix
 ROUTE_MATRIX_URL = "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix"
@@ -31,6 +31,10 @@ def haversine_km(lat1, lon1, lat2, lon2) -> float | None:
 
 
 def geocode(address: str) -> tuple[float, float] | None:
+    """None means ZERO_RESULTS, a real, cacheable answer. Anything else
+    non-OK (bad key, over quota) raises instead, so
+    ingest/geocode_commute.py doesn't cache a config problem as permanent
+    "no data for this address"."""
     if not config.GOOGLE_MAPS_API_KEY:
         raise RuntimeError("GOOGLE_MAPS_API_KEY is not set in .env")
     resp = requests.get(
@@ -40,8 +44,11 @@ def geocode(address: str) -> tuple[float, float] | None:
     )
     resp.raise_for_status()
     data = resp.json()
-    if data.get("status") != "OK" or not data.get("results"):
+    status = data.get("status")
+    if status == "ZERO_RESULTS":
         return None
+    if status != "OK" or not data.get("results"):
+        raise RuntimeError(f"Geocoding failed for {address!r}: {status} -- {data.get('error_message', '')}")
     loc = data["results"][0]["geometry"]["location"]
     return loc["lat"], loc["lng"]
 

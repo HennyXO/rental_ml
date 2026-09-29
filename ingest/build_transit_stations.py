@@ -3,17 +3,17 @@ folder of it) into data/transit_stations.csv (name, lat, lon, mode) for
 train/metro/light-rail stations only.
 
 The GTFS "Timetables Complete" bundle covers every operator (trains, metro,
-light rail, buses, ferries...) in one large zip -- buses dominate by row
+light rail, buses, ferries...) in one large zip. Buses dominate by row
 count, so we filter using the GTFS route_type field rather than loading
 everything. TfNSW uses Google's *extended* route_type vocabulary, not the
-basic GTFS 0-7 spec (confirmed by inspecting the real feed -- route_type
+basic GTFS 0-7 spec (confirmed by inspecting the real feed): route_type
 '2' = train, covering both "Sydney Trains" and "NSW Trains" agencies,
 '401' = "M1 Metro North West and Bankstown Line" (agency "Sydney Metro"),
 '900' = "L1"-"L4" etc (agencies "Light Rail"/"Sydney Light Rail"/"Parramatta
 Light Rail"). See https://developers.google.com/transit/gtfs/reference/extended-route-types
 
 This only needs to be run once (or occasionally, e.g. when a metro
-extension opens) -- the output is a small static CSV that's checked into
+extension opens). The output is a small static CSV that's checked into
 git (it's public transit station locations, not personal data), and
 everything else reads from that, not from the raw GTFS data.
 

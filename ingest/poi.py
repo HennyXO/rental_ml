@@ -3,12 +3,12 @@ school, supermarket, park, beach), generalizing the pattern first built for
 transit stations alone.
 
 Point locations come from two static, committed CSVs (small, non-personal
-public data -- built once, not fetched live):
-- data/transit_stations.csv: name, lat, lon, mode -- from TfNSW's GTFS feed,
+public data, built once, not fetched live):
+- data/transit_stations.csv: name, lat, lon, mode, from TfNSW's GTFS feed,
   see ingest/build_transit_stations.py. "mode" values are the bare GTFS-ish
   names (train/metro/light_rail); mapped to the "_station"-suffixed category
   names below on load.
-- data/poi.csv: name, lat, lon, category -- from OpenStreetMap's Overpass
+- data/poi.csv: name, lat, lon, category, from OpenStreetMap's Overpass
   API, see ingest/build_poi.py. category values already match the names
   below (school/supermarket/park/beach).
 
@@ -73,7 +73,7 @@ def nearest_poi(lat, lon, category: str) -> tuple[str, float, float, float] | tu
 def get_nearest_pois(lat, lon) -> dict:
     """nearest_<category> / _km / _walk_minutes for every category in
     POI_CATEGORIES. Categories with no data yet (CSV not built) just come
-    back null -- nothing else breaks."""
+    back null; nothing else breaks."""
     result = {}
     for category in POI_CATEGORIES:
         name, p_lat, p_lon, km = nearest_poi(lat, lon, category)
